@@ -1,16 +1,20 @@
 /*
  * @Author: tanknee 
- * @Date: 2019-08-04 22:31:28 
- * @Last Modified by: tanknee
- * @Last Modified time: 2019-08-04 23:32:56
+ * @Date: 2019-08-05 20:09:13 
+ * @Last Modified by:   tanknee 
+ * @Last Modified time: 2019-08-05 20:09:13 
  */
+
 //import java.swing.*;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,31 +39,35 @@ public class MainWindow extends JFrame implements ActionListener{
     private int Flag = 0;//此时是第一个参数
     public MainWindow(){
         super("计算器");
+        
+        this.setLayout(new BorderLayout());
+        this.setSize(411,156);
         testview = new JLabel("显示器");
         testview.setSize(320,100);
-        this.add(testview);
-        this.setLayout(new FlowLayout());
-        this.setSize(320, 480);
-        this.setBounds(10, 10, 320, 480);
+        this.add(testview,BorderLayout.NORTH);
+        //this.setBounds(10, 10, 320, 480);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+        JPanel numberJPanel = new JPanel();
         for(int i = 0;i<numberButtons.length;i++){
             numberButtons[i] = new ComponentButton(i);
             numberButtons[i].addActionListener(this);
-            this.add(numberButtons[i]);
+            numberJPanel.add(numberButtons[i]);
             //System.out.println("按钮"+i+"添加成功");
         }
-        this.add(operateButton_plus);
+        this.add(numberJPanel,BorderLayout.CENTER);
+        JPanel operatorJPanel = new JPanel();
+        operatorJPanel.add(operateButton_plus,BorderLayout.SOUTH);
         operateButton_plus.addActionListener(this);
-        this.add(operateButton_subtract);
+        operatorJPanel.add(operateButton_subtract,BorderLayout.SOUTH);
         operateButton_subtract.addActionListener(this);
-        this.add(operateButton_mult);
+        operatorJPanel.add(operateButton_mult,BorderLayout.SOUTH);
         operateButton_mult.addActionListener(this);
-        this.add(operateButton_divide);
+        operatorJPanel.add(operateButton_divide,BorderLayout.SOUTH);
         operateButton_divide.addActionListener(this);
-        this.add(operateButton_equals);
+        operatorJPanel.add(operateButton_equals,BorderLayout.SOUTH);
         operateButton_equals.addActionListener(this);
+        this.add(operatorJPanel,BorderLayout.SOUTH);
         this.setVisible(true);
     }
     public static void main(String[] args){
@@ -93,7 +101,28 @@ public class MainWindow extends JFrame implements ActionListener{
             finaldate = Integer.valueOf(theFirstPram).intValue()*Integer.valueOf(theSecondPram).intValue();
                 break;
             case "/":
-            finaldate = Integer.valueOf(theFirstPram).intValue()/Integer.valueOf(theSecondPram).intValue();
+            if(Integer.valueOf(theSecondPram).intValue() != 0){
+                finaldate = Integer.valueOf(theFirstPram).intValue()/Integer.valueOf(theSecondPram).intValue();
+            }else{
+                JDialog jDialog = new JDialog();
+                jDialog.setTitle("被除数为0");
+                finaldate = 0;
+                jDialog.setSize(300,100);
+                //jDialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                jDialog.setLocationRelativeTo(this);
+                JPanel diaJPanel = new JPanel();
+                JButton jButton = new JButton();
+                jButton.setText("确认");
+                jButton.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        jDialog.setVisible(false);
+                    }
+                });
+                diaJPanel.add(jButton);
+                jDialog.add(diaJPanel);
+                jDialog.setVisible(true);
+                
+            }
                 break;
             default:
                 break;
