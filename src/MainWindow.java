@@ -38,7 +38,7 @@ public class MainWindow extends JFrame implements ActionListener{
     //标志一下当前的变量  
     private int Flag = 0;//此时是第一个参数
     public MainWindow(){
-        super("计算器");
+        super("老泥巴牌计算器");
         
         this.setLayout(new BorderLayout());
         this.setSize(411,156);
