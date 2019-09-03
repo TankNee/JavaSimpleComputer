@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SparseArrayDemo",
+            "request": "launch",
+            "mainClass": "SparseArrayDemo"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - regular",
             "request": "launch",
             "mainClass": "regular"
