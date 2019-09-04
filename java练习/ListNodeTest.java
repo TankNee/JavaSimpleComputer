@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class ListNodeTest{
     public static void main(String args[]){
         ListNode test_1 = new ListNode(9);
@@ -17,7 +19,12 @@ public class ListNodeTest{
         node_3.next = null;
         ListNode result;
         result = removeElements_2(test_1,9);
-
+        int[] A = new int[3];
+        A[0] = 2;
+        A[1] = 4;
+        A[2] = 1;
+        Arrays.sort(A);
+        System.out.println();
     }
     public static ListNode removeElements_2(ListNode head, int val) {
         /**
